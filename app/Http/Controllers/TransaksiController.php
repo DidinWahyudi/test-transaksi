@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class TransaksiController extends Controller
 {
@@ -12,9 +13,16 @@ class TransaksiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $transaksi = Transaksi::orderBy('tanggal_transaksi')->get();
+        return view('pages.transaksi.index', compact('transaksi'));
     }
 
     /**

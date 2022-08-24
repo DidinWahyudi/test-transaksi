@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class BarangController extends Controller
 {
@@ -12,9 +13,16 @@ class BarangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $barang = Barang::orderBy('id')->get();
+        return view('pages.barang.index', compact('barang'));
     }
 
     /**

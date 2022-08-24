@@ -13,6 +13,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -54,11 +57,11 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Daftar Barang</a>
+                                <a class="nav-link" href="{{ route('barang') }}">Daftar Barang</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Daftar Transaksi</a>
+                                <a class="nav-link" href="{{ route('transaksi') }}">Daftar Transaksi</a>
                             </li>
                             <li class="nav-item dropdown">
 
@@ -90,5 +93,4 @@
         </main>
     </div>
 </body>
-
 </html>

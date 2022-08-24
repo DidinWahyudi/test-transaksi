@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('barang_id')->constrained();
+            $table->date('tanggal_transaksi');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }
