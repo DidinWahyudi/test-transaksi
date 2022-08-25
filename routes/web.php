@@ -29,3 +29,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/barang', [BarangController::class, 'index'])->name('barang');
 
 Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
