@@ -70,30 +70,30 @@
                     </div>
                 </li>
                 <!-- Notifications Dropdown Menu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('barang') }}">Daftar Barang</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('transaksi') }}">Daftar Transaksi</a>
+                </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
+
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{-- {{ Auth::user()->name }} --}}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
                 </li>
             </ul>
@@ -106,7 +106,7 @@
             <a href="index3.html" class="brand-link">
                 <img src="{{ asset('template/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">TOKO KELONTONG</span>
             </a>
 
             <!-- Sidebar -->
@@ -118,7 +118,7 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block">Belum Login</a>
                     </div>
                 </div>
 
@@ -226,120 +226,7 @@
 
             <!-- Main content -->
             <section class="content">
-                <div class="container-fluid">
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-info">
-                                <div class="inner">
-                                    <h3>150</h3>
-
-                                    <p>New Orders</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-success">
-                                <div class="inner">
-                                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                                    <p>Bounce Rate</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-warning">
-                                <div class="inner">
-                                    <h3>44</h3>
-
-                                    <p>User Registrations</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-danger">
-                                <div class="inner">
-                                    <h3>65</h3>
-
-                                    <p>Unique Visitors</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                    </div>
-                    <!-- /.row -->
-                    <!-- Main row -->
-                    <div class="row">
-                        <!-- Left col -->
-                        <section class="col-lg-7 connectedSortable">
-                            <!-- Custom tabs (Charts with tabs)-->
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">
-                                        <i class="fas fa-chart-pie mr-1"></i>
-                                        Sales
-                                    </h3>
-                                    <div class="card-tools">
-                                        <ul class="nav nav-pills ml-auto">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" href="#revenue-chart"
-                                                    data-toggle="tab">Area</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div><!-- /.card-header -->
-                                <div class="card-body">
-                                    <div class="tab-content p-0">
-                                        <!-- Morris chart - Sales -->
-                                        <div class="chart tab-pane active" id="revenue-chart"
-                                            style="position: relative; height: 300px;">
-                                            <canvas id="revenue-chart-canvas" height="300"
-                                                style="height: 300px;"></canvas>
-                                        </div>
-                                        <div class="chart tab-pane" id="sales-chart"
-                                            style="position: relative; height: 300px;">
-                                            <canvas id="sales-chart-canvas" height="300"
-                                                style="height: 300px;"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </section>
-
-                    </div>
-
-                </div>
+                @yield('content')
             </section>
 
         </div>
