@@ -25,7 +25,7 @@ class FilterController extends Controller
         $sampai = $request->sampai;
 
         $laporan = Transaksi::whereBetween('tanggal_transaksi', [$dari, $sampai])->get();
-        return view('pages.filter.index', compact('laporan'));
+        return view('pages.filter.index', compact('laporan', 'dari', 'sampai'));
     }
 
     /**

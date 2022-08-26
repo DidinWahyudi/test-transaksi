@@ -30,7 +30,7 @@
                     </div>
                     @endif
                     <div class="card">
-                        <div class="card-header">List Transaksi Per Tanggal {{ date('d F Y') }}</div>
+                        <div class="card-header">List Transaksi Per Tanggal <b>{{ date('d F Y') }}</b></div>
                         <div class="card-body">
                             <form action="{{ route('filter') }}" action="GET">
                                 <div class="row">

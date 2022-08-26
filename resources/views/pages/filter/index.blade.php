@@ -83,31 +83,33 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @if ($message = Session::get('success'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <p style="margin-bottom: 0px;"><i class="icon fas fa-check"></i>{{ $message }}</p>
 
-                    </div>
-                    @endif
                     <div class="card">
-                        <div class="card-header">Laporan Transaksi</div>
+                        <div class="card-header">Laporan Transaksi dari <b>{{ date('d F Y', strtotime($dari)) }}</b> sampai <b>{{ date('d F Y', strtotime($sampai)) }}</b></div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="input-group">
-                                        <input type="date" class="form-control float-right" id="reservation">
-                                      </div>
+                            <form action="{{ route('filter') }}" action="GET">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <a class="btn btn-success" href="{{ route('transaksi') }}">Lihat Semua Transaksi</a>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input type="date" class="form-control float-right" id="dari" name="dari">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input type="date" class="form-control float-right" id="sampai"
+                                                name="sampai">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-primary btn-block">Filter
+                                            Transaksi</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="input-group">
-                                        <input type="date" class="form-control float-right" id="reservation">
-                                      </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <a class="btn btn-primary btn-block" href="#">Filter Transaksi</a>
-                                </div>
-                            </div>
+                            </form>
                             <hr>
                             <div class="row">
                                 <div class="col-md-12">
