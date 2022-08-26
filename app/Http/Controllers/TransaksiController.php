@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -21,7 +22,7 @@ class TransaksiController extends Controller
 
     public function index()
     {
-        $transaksi = Transaksi::orderBy('tanggal_transaksi')->get();
+        $transaksi = Transaksi::with('barang')->get();
         return view('pages.transaksi.index', compact('transaksi'));
     }
 
@@ -32,7 +33,8 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        //
+        $barang = Barang::orderByDesc('stok')->get();
+        return view('pages.transaksi.form', compact('barang'));
     }
 
     /**
@@ -43,7 +45,16 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Transaksi::create([
+            'barang_id' => $request->barang_id,
+            'jumlah' => $request->jumlah,
+            'tanggal_transaksi' => new \DateTime,
+        ]);
+
+        Barang::where('id', $request->barang_id)
+            ->decrement('stok', $request->jumlah);
+
+        return redirect('transaksi')->with(['success' => 'Data Berhasil ditambahkan']);
     }
 
     /**
@@ -54,7 +65,7 @@ class TransaksiController extends Controller
      */
     public function show(Transaksi $transaksi)
     {
-        //
+        return view('pages.transaksi.detail', compact('transaksi'));
     }
 
     /**
@@ -86,8 +97,10 @@ class TransaksiController extends Controller
      * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaksi $transaksi)
+    public function destroy($id)
     {
-        //
+        $transaksi = Transaksi::where('id', $id)->first();
+        $transaksi->delete();
+        return redirect('transaksi')->with(['success' => 'Data Berhasil dihapus']);
     }
 }

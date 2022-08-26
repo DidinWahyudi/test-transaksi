@@ -21,7 +21,7 @@ class BarangController extends Controller
 
     public function index()
     {
-        $barang = Barang::orderBy('id')->get();
+        $barang = Barang::get();
         return view('pages.barang.index', compact('barang'));
     }
 
@@ -32,7 +32,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.barang.form');
     }
 
     /**
@@ -43,7 +43,13 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Barang::create([
+            'nama_barang' => $request->nama_barang,
+            'jenis_barang' => $request->jenis_barang,
+            'stok' => $request->stok,
+        ]);
+
+        return redirect('barang')->with(['success' => 'Data Berhasil ditambahkan']);
     }
 
     /**
@@ -54,7 +60,7 @@ class BarangController extends Controller
      */
     public function show(Barang $barang)
     {
-        //
+        return view('pages.barang.detail', compact('barang'));
     }
 
     /**
@@ -65,7 +71,7 @@ class BarangController extends Controller
      */
     public function edit(Barang $barang)
     {
-        //
+        return view('pages.barang.form', compact('barang'));
     }
 
     /**
@@ -75,9 +81,14 @@ class BarangController extends Controller
      * @param  \App\Models\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Barang $barang)
+    public function update(Request $request, $id)
     {
-        //
+        Barang::where('id', '=', $id)->update([
+            'nama_barang'    => $request->nama_barang,
+            'jenis_barang'   => $request->jenis_barang,
+            'stok'           => $request->stok,
+        ]);
+        return redirect('barang')->with(['success' => 'Data Berhasil diubah']);
     }
 
     /**
@@ -86,8 +97,10 @@ class BarangController extends Controller
      * @param  \App\Models\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Barang $barang)
+    public function destroy($id)
     {
-        //
+        $barang = Barang::where('id', $id)->first();
+        $barang->delete();
+        return redirect('barang')->with(['success' => 'Data Berhasil Dihapus']);
     }
 }
