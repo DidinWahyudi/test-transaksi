@@ -89,7 +89,7 @@
                                         <div class="col-2">
                                             <div class="form-group">
                                                 <label for="stok">Jumlah Stok</label>
-                                                <input type="text" class="form-control" id="stok"
+                                                <input type="number" class="form-control" id="stok"
                                                     name="stok" placeholder="Stok"
                                                     value="{{ old('stok', @$barang->stok) }}">
                                                 @if ($errors->has('stok'))

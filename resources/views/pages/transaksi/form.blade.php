@@ -36,9 +36,10 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Pilih Barang</label>
-                                            <select class="form-control" name="barang_id">
+                                            <select class="form-control" name="barang_id" id="barang_id">
+                                                <option selected="true" disabled="disabled" value="">Pilih Barang</option>
                                                 @foreach ($barang as $item)
-                                                <option value="{{ $item->id }}">{{ $item->nama_barang }} - Stok {{ $item->stok }} Pcs</option>
+                                                <option value="{{ $item->id }}" data-barang="{{ $item->stok }}">{{ $item->nama_barang }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -46,14 +47,14 @@
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label for="stok">Stok Barang</label>
-                                            <input type="text" class="form-control" id="jumlah"
-                                                name="jumlah" placeholder="Jumlah">
+                                            <input type="text" class="form-control" id="stok"
+                                                name="stok" placeholder="Stok" readonly>
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label for="stok">Jumlah Yang Dibeli</label>
-                                            <input type="text" class="form-control" id="jumlah"
+                                            <input type="number" class="form-control" id="jumlah"
                                                 name="jumlah" placeholder="Jumlah">
                                         </div>
                                     </div>
@@ -71,4 +72,40 @@
             </div>
         </div>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $('#barang_id').on('change', function() {
+          const selected = $(this).find('option:selected');
+          const stok = selected.data('barang');
+
+          $("#stok").val(stok);
+        });
+      });
+</script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script>
+jQuery.validator.setDefaults({
+  debug: true,
+  success: "valid"
+});
+$( "#modalForm" ).validate({
+  rules: {
+    jumlah: "required",
+    jumlah: {
+        required: true,
+      max: "#stok"
+    }
+  },
+  messages: {
+
+        jumlah: {
+            required: "Masukan Jumlah",
+            max: "Jumlah melebihi stok yang ada",
+        }
+    }
+});
+</script>
     @endsection
