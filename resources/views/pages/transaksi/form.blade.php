@@ -96,14 +96,14 @@ $( "#modalForm" ).validate({
     jumlah: "required",
     jumlah: {
         required: true,
-      max: "#stok"
+      //max: "#stok"
     }
   },
   messages: {
 
         jumlah: {
             required: "Masukan Jumlah",
-            max: "Jumlah melebihi stok yang ada",
+            //max: "Jumlah melebihi stok yang ada",
         }
     }
 });

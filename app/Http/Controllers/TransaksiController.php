@@ -103,4 +103,8 @@ class TransaksiController extends Controller
         $transaksi->delete();
         return redirect('transaksi')->with(['success' => 'Data Berhasil dihapus']);
     }
+
+    public function bestSeller()
+    {
+    }
 }
